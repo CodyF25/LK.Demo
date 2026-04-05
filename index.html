@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Little Kitchen of Westport</title>
+  <meta name="description" content="Little Kitchen of Westport — AI-powered hospitality site with reservations, ordering, voice concierge, and manager demo mode." />
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=zodiak@400,500,700&display=swap" rel="stylesheet">
+  <style>
+    :root,[data-theme="light"]{
+      --text-xs:clamp(.75rem,.7rem + .2vw,.875rem);--text-sm:clamp(.875rem,.82rem + .25vw,1rem);--text-base:clamp(1rem,.96rem + .25vw,1.125rem);--text-lg:clamp(1.125rem,1rem + .6vw,1.5rem);--text-xl:clamp(1.5rem,1.25rem + 1vw,2.2rem);--text-2xl:clamp(2rem,1.35rem + 2vw,3.5rem);--text-3xl:clamp(2.8rem,1.4rem + 3vw,5rem);
+      --space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;--space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;--space-12:3rem;--space-16:4rem;--space-20:5rem;
+      --font-body:'General Sans',Inter,sans-serif;--font-display:'Zodiak',Georgia,serif;
+      --color-bg:#f7f2ea;--color-surface:#fbf8f3;--color-surface-2:#fffdfa;--color-surface-offset:#efe6da;--color-border:rgba(28,22,18,.12);--color-divider:rgba(28,22,18,.08);--color-text:#1d1713;--color-text-muted:#6c6057;--color-text-faint:#aa9b8e;--color-primary:#7e1e22;--color-primary-hover:#63161a;--color-gold:#b68a45;--color-green:#5a7662;--color-text-inverse:#fff8f1;--radius-sm:.45rem;--radius-md:.75rem;--radius-lg:1rem;--radius-xl:1.5rem;--radius-full:9999px;--transition:180ms cubic-bezier(.16,1,.3,1);--shadow-sm:0 1px 2px rgba(18,13,10,.06);--shadow-md:0 10px 30px rgba(18,13,10,.08);--shadow-lg:0 24px 64px rgba(18,13,10,.12);--content:1220px;
+    }
+    [data-theme="dark"]{--color-bg:#130f0d;--color-surface:#191411;--color-surface-2:#211915;--color-surface-offset:#2a211c;--color-border:rgba(247,239,229,.12);--color-divider:rgba(247,239,229,.08);--color-text:#f5eee5;--color-text-muted:#cab9aa;--color-text-faint:#8f8278;--color-primary:#ca6168;--color-primary-hover:#de767d;--color-gold:#d2ab63;--color-green:#86a78f;--color-text-inverse:#140f0d;--shadow-sm:0 1px 2px rgba(0,0,0,.22);--shadow-md:0 10px 30px rgba(0,0,0,.32);--shadow-lg:0 24px 64px rgba(0,0,0,.42)}
+    *,*:before,*:after{box-sizing:border-box;margin:0;padding:0} html{scroll-behavior:smooth;scroll-padding-top:6rem} body{background:var(--color-bg);color:var(--color-text);font:var(--text-base)/1.6 var(--font-body);min-height:100dvh;-webkit-font-smoothing:antialiased} img,svg{display:block;max-width:100%;height:auto} a{text-decoration:none;color:inherit} button,input{font:inherit;color:inherit} button{cursor:pointer;border:0;background:none} h1,h2,h3,h4{font-family:var(--font-display);line-height:1.04;text-wrap:balance} p,li{text-wrap:pretty} :focus-visible{outline:2px solid var(--color-primary);outline-offset:3px;border-radius:var(--radius-sm)}
+    .container{width:min(calc(100% - 2rem),var(--content));margin:auto}.skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;background:var(--color-surface);padding:.8rem 1rem;z-index:999}.site-header{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--color-bg) 86%, transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--color-divider)}
+    .header-inner{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 0}.brand{display:flex;align-items:center;gap:.8rem}.brand svg{width:2.75rem;height:2.75rem}.brand-meta strong{display:block;font-family:var(--font-display);font-size:var(--text-lg);line-height:1}.brand-meta span{display:block;color:var(--color-text-muted);font-size:var(--text-xs);letter-spacing:.12em;text-transform:uppercase}.nav{display:flex;gap:1rem;flex-wrap:wrap}.nav a{font-size:var(--text-sm);color:var(--color-text-muted)}.nav a:hover{color:var(--color-text)}
+    .btn,.toggle-btn,.mode-btn,.chip-btn{min-height:44px;border:1px solid var(--color-border);border-radius:var(--radius-full);padding:.8rem 1rem;background:var(--color-surface);transition:all var(--transition)}.btn:hover,.toggle-btn:hover,.mode-btn:hover,.chip-btn:hover{transform:translateY(-1px);box-shadow:var(--shadow-sm)}.btn.primary,.mode-btn.active,.chip-btn.active{background:var(--color-primary);color:var(--color-text-inverse);border-color:transparent}.btn.primary:hover{background:var(--color-primary-hover)}.header-actions{display:flex;gap:.7rem;flex-wrap:wrap}
+    .mode-switch{padding:1rem 0;border-bottom:1px solid var(--color-divider);background:color-mix(in srgb,var(--color-surface) 80%, var(--color-surface-2))}.mode-row{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}.mode-buttons{display:flex;gap:.75rem;flex-wrap:wrap}.micro{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.14em;color:var(--color-gold);font-weight:700}
+    .hero{padding:4.5rem 0 3rem;position:relative;overflow:hidden}.hero:before{content:"";position:absolute;right:-8rem;top:2rem;width:28rem;height:28rem;background:radial-gradient(circle at center,color-mix(in srgb,var(--color-gold) 22%, transparent),transparent 65%);filter:blur(12px);pointer-events:none}.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:2rem;align-items:start} h1{font-size:var(--text-3xl);margin:.7rem 0 1rem;max-width:11ch}.lead{font-size:var(--text-lg);color:var(--color-text-muted);max-width:58ch}.hero-actions,.pill-row,.segment{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.25rem}.pill{padding:.55rem .85rem;border-radius:var(--radius-full);border:1px solid var(--color-border);background:var(--color-surface-2);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+    .card,.panel,.voice-card,.chat-card,.demo-card,.menu-card,.ops-card,.contact-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);box-shadow:var(--shadow-md)}.card,.panel,.voice-card,.chat-card,.demo-card,.menu-card,.ops-card,.contact-card{padding:1.25rem}.hero-side{display:grid;gap:1rem}.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.stat{padding:1rem;border-radius:1rem;background:var(--color-surface-2);border:1px solid var(--color-border)}.stat strong{display:block;font-size:var(--text-lg)}
+    section{padding:4rem 0;border-top:1px solid var(--color-divider)}.section-head{display:grid;grid-template-columns:.8fr 1.2fr;gap:2rem;align-items:start;margin-bottom:2rem}.section-head p{color:var(--color-text-muted);max-width:64ch}.grid-2,.grid-3,.grid-4{display:grid;gap:1rem}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .site-mode,.demo-mode{display:none}.site-mode.active,.demo-mode.active{display:block}.chat-card{display:grid;gap:1rem}.msg{max-width:82%;padding:1rem 1.1rem;border-radius:1.1rem;border:1px solid var(--color-border);background:var(--color-surface-2)}.msg.ai{background:color-mix(in srgb,var(--color-primary) 10%, var(--color-surface-2));margin-right:auto}.msg.user{margin-left:auto}
+    .voice-shell{display:grid;grid-template-columns:1.1fr .9fr;gap:1rem;align-items:start}.voice-visual{padding:1.25rem;border:1px solid var(--color-border);border-radius:1.25rem;background:linear-gradient(180deg,color-mix(in srgb,var(--color-surface-2) 86%, var(--color-surface)),var(--color-surface-offset))}.orb{width:120px;height:120px;border-radius:50%;margin:0 auto 1rem;background:radial-gradient(circle at 35% 35%,color-mix(in srgb,var(--color-gold) 34%, white),color-mix(in srgb,var(--color-primary) 78%, var(--color-gold)) 55%,var(--color-primary-hover));position:relative;box-shadow:0 0 0 10px color-mix(in srgb,var(--color-primary) 10%, transparent),0 0 0 24px color-mix(in srgb,var(--color-gold) 10%, transparent);animation:breathe 2.8s ease-in-out infinite}.orb:after{content:"";position:absolute;inset:18% auto auto 18%;width:26%;height:26%;border-radius:50%;background:rgba(255,255,255,.35);filter:blur(2px)}
+    .bars{display:flex;justify-content:center;align-items:flex-end;gap:6px;height:54px;margin-top:1rem}.bar{width:10px;border-radius:999px;background:color-mix(in srgb,var(--color-primary) 82%, var(--color-gold));animation:talk 1.15s ease-in-out infinite}.bar:nth-child(2){animation-delay:.12s}.bar:nth-child(3){animation-delay:.25s}.bar:nth-child(4){animation-delay:.38s}.bar:nth-child(5){animation-delay:.5s}
+    @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}} @keyframes talk{0%,100%{height:14px}25%{height:42px}50%{height:22px}75%{height:50px}}
+    .voice-script{display:grid;gap:.75rem}.script-line{padding:.9rem 1rem;border-radius:1rem;background:var(--color-surface-2);border:1px solid var(--color-border)}
+    .demo-split{display:grid;grid-template-columns:300px 1fr;gap:1rem}.demo-nav{display:grid;gap:.75rem}.demo-trigger{text-align:left;padding:1rem;border:1px solid var(--color-border);border-radius:1rem;background:var(--color-surface-2);min-height:72px}.demo-trigger.active{background:color-mix(in srgb,var(--color-primary) 12%, var(--color-surface-2));border-color:color-mix(in srgb,var(--color-primary) 36%, var(--color-border))}.demo-panel{display:none}.demo-panel.active{display:block}
+    .menu-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}.price{font-family:var(--font-display);font-size:1.3rem;color:var(--color-primary)}.ops-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}.kpi{padding:1rem;border:1px solid var(--color-border);border-radius:1rem;background:var(--color-surface-2)}.kpi strong{display:block;font-size:1.5rem}
+    .footer{padding:3rem 0 5rem;color:var(--color-text-muted)}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}.reveal.visible{opacity:1;transform:none}
+    @media (max-width:1080px){.hero-grid,.section-head,.grid-2,.grid-3,.grid-4,.voice-shell,.demo-split,.menu-grid,.ops-kpis{grid-template-columns:1fr}.nav{display:none}}
+    @media (max-width:720px){.header-inner,.mode-row{align-items:flex-start;flex-direction:column}.stats{grid-template-columns:1fr}}
+    @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" fill="var(--color-primary)"></circle>
+          <path d="M18 46V18h8v20c0 5 2 8 7 8h13v8H31c-8 0-13-4-13-8Z" fill="white"></path>
+          <path d="M34 18h12c0 9-4 14-12 16V18Z" fill="white" opacity=".78"></path>
+        </svg>
+        <div class="brand-meta">
+          <strong>Little Kitchen of Westport</strong>
+          <span>AI-first hospitality website</span>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#experience">Experience</a>
+        <a href="#voice">AI Voice</a>
+        <a href="#menu">Menu</a>
+        <a href="#reservations">Reservations</a>
+        <a href="#operations">Operations</a>
+      </nav>
+      <div class="header-actions">
+        <button class="toggle-btn" data-theme-toggle>Theme</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mode-switch">
+    <div class="container mode-row">
+      <div>
+        <div class="micro">Demo control</div>
+        <strong>Switch between the polished guest-facing site and the manager walkthrough version</strong>
+      </div>
+      <div class="mode-buttons">
+        <button class="mode-btn active" data-mode="site">Real site view</button>
+        <button class="mode-btn" data-mode="demo">Manager demo view</button>
+        <a class="btn" href="https://littlekitchenwestport.com" target="_blank" rel="noopener noreferrer">Current live website</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal visible">
+          <div class="micro">Westport hospitality since 1987</div>
+          <h1>A refined digital front door for Little Kitchen — with an AI concierge guests can actually talk to.</h1>
+          <p class="lead">This version is built to feel like the real Little Kitchen website, not a concept slide. Guests can reserve tables, order pickup or delivery, ask menu and allergy questions, and speak naturally with a voice concierge that sounds warm, polished, and expressive.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#voice">Try the AI voice experience</a>
+            <a class="btn" href="#reservations">Book a table</a>
+            <a class="btn" href="#menu">Explore the menu</a>
+          </div>
+          <div class="pill-row">
+            <span class="pill">423 Post Rd E, Westport, CT 06880</span>
+            <span class="pill">(203) 454-5540</span>
+            <span class="pill">Sunday–Thursday 11:30 AM–9:30 PM</span>
+            <span class="pill">Friday–Saturday 11:30 AM–10:00 PM</span>
+          </div>
+        </div>
+        <aside class="hero-side reveal">
+          <div class="voice-card">
+            <div class="micro">What the AI handles</div>
+            <div class="stats" style="margin-top:1rem">
+              <div class="stat"><strong>Reservations</strong><span>Checks availability, offers alternatives, and manages waitlist logic.</span></div>
+              <div class="stat"><strong>Orders</strong><span>Takes pickup and delivery orders with modifiers and read-back.</span></div>
+              <div class="stat"><strong>Phone calls</strong><span>Answers naturally with voice, expression, and SMS follow-up.</span></div>
+              <div class="stat"><strong>Email + catering</strong><span>Triages inbox requests and captures large-party leads.</span></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="site-mode active" data-view="site">
+      <section id="experience">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <div class="micro">Guest experience</div>
+              <h2>The site as guests would actually use it</h2>
+            </div>
+            <div>
+              <p>Instead of separating “demo” from “website,” this version behaves like the real guest experience. It uses Little Kitchen’s real public contact details, published hours, reservation contact flow, and menu positioning around Asian fusion, sushi, lunch, dinner, takeout, delivery, and rewards.</p>
+            </div>
+          </div>
+          <div class="grid-3 reveal">
+            <div class="card"><h3>Reserve instantly</h3><p>Guests ask in natural language, and the AI offers confirmed times or smart alternatives when prime slots are full.</p></div>
+            <div class="card"><h3>Order conversationally</h3><p>The AI can build a pickup or delivery cart from phrases like “General Tso’s Chicken, dumplings, and a roll.”</p></div>
+            <div class="card"><h3>Talk instead of type</h3><p>The voice concierge gives the site a real host-like feel, with pacing and expression suitable for a hospitality brand.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="voice">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <div class="micro">AI voice concierge</div>
+              <h2>An expressive, realistic AI host</h2>
+            </div>
+            <div>
+              <p>The AI voice experience is meant to sound like a polished host, not a flat assistant. In a production version, this would use a conversational voice stack with pauses, emphasis, warmth, and quick turn-taking for phone and on-site web voice interactions.</p>
+            </div>
+          </div>
+          <div class="voice-shell reveal">
+            <div class="voice-card">
+              <div class="voice-visual">
+                <div class="orb" aria-hidden="true"></div>
+                <div class="micro" style="text-align:center">Voice concierge speaking</div>
+                <div class="bars" aria-hidden="true">
+                  <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+                </div>
+              </div>
+            </div>
+            <div class="voice-card voice-script">
+              <div class="script-line"><strong>Greeting</strong><br>“Thank you for calling Little Kitchen of Westport. I can help with reservations, pickup, delivery, catering, menu questions, and hours. What can I take care of for you today?”</div>
+              <div class="script-line"><strong>Expressive full-time response</strong><br>“We’re fully booked at 7:00 tonight, but I do have 6:15, 6:30, or 8:00 available for four. If you’d like, I can also add you to the waitlist — or help you place a pickup order instead.”</div>
+              <div class="script-line"><strong>Allergy-safe tone</strong><br>“I can share ingredient guidance and note your request for the kitchen. For severe allergies, I’d also like to have staff confirm directly before we finalize.”</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="menu">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <div class="micro">Menu highlights</div>
+              <h2>Built from Little Kitchen’s actual menu structure</h2>
+            </div>
+            <div>
+              <p>The menu architecture follows the public site’s categories and featured dishes so the AI can recommend real items. Signature examples include California Roll, Dynamite Roll, Komodo Roll, Sesame Beef or Chicken, Rendang Beef or Chicken, Tangerine Beef, Norwegian Salmon, and Peking Duck with its preparation note.</p>
+            </div>
+          </div>
+          <div class="menu-grid reveal">
+            <div class="menu-card"><div class="price">$7.00</div><h3>California Roll</h3><p>Easy sushi add-on and great entry recommendation.</p></div>
+            <div class="menu-card"><div class="price">$18.50</div><h3>Dynamite Roll</h3><p>Featured as a premium signature roll for upsells and reorder memory.</p></div>
+            <div class="menu-card"><div class="price">$19.50</div><h3>Komodo Roll</h3><p>Strong recommendation for guests who want bolder sushi.</p></div>
+            <div class="menu-card"><div class="price">$14.50</div><h3>Pork Dumplings</h3><p>Core appetizer upsell with steamed or fried clarification.</p></div>
+            <div class="menu-card"><div class="price">$25.00</div><h3>Rendang Beef or Chicken</h3><p>Use as a heritage signature dish in the homepage story and voice recommendations.</p></div>
+            <div class="menu-card"><div class="price">$48.00</div><h3>Peking Duck</h3><p>Flagged with 30-minute preparation time and limited availability logic.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="reservations">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <div class="micro">Reservations + ordering</div>
+              <h2>Real guest flows with AI handling the conversation</h2>
+            </div>
+            <div>
+              <p>The reservation experience is integration-ready, which matters because the restaurant’s public OpenTable page indicates it is not currently on the OpenTable booking network. The AI therefore needs to work with OpenTable, Resy, SevenRooms, Tock, Yelp Guest Manager, or a custom booking layer rather than assuming one live provider.</p>
+            </div>
+          </div>
+          <div class="grid-2 reveal">
+            <div class="chat-card">
+              <div class="msg user">Can I get Saturday at 7:00 PM for four?</div>
+              <div class="msg ai">We’re fully booked at 7:00 PM for four, but I can offer 6:15 PM, 6:30 PM, or 8:00 PM. I can also place you on the waitlist or help with pickup or delivery tonight.</div>
+              <div class="msg user">Let’s do 8:00 PM. It’s for an anniversary.</div>
+              <div class="msg ai">Perfect — I can hold 8:00 PM for four and add your anniversary note. Please confirm your name and mobile number for the text confirmation.</div>
+            </div>
+            <div class="chat-card">
+              <div class="msg user">I want delivery: General Tso’s Chicken, one Dynamite Roll, and fried dumplings.</div>
+              <div class="msg ai">Absolutely. I have General Tso’s Chicken, 1 Dynamite Roll, and Fried Pork Dumplings. Would you like to add a Japanese Soda or Kani Salad? Once you confirm, I’ll collect your delivery address and provide the estimated arrival time.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="operations">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <div class="micro">Operational control</div>
+              <h2>What staff sees behind the scenes</h2>
+            </div>
+            <div>
+              <p>Managers and staff need live visibility into reservations, phone transcripts, AI conversations, 86’d items, pricing, and escalation. This dashboard section shows the operational layer that supports the guest-facing site.</p>
+            </div>
+          </div>
+          <div class="ops-kpis reveal">
+            <div class="kpi"><strong>24</strong><span>Calls answered</span></div>
+            <div class="kpi"><strong>9</strong><span>Reservations booked</span></div>
+            <div class="kpi"><strong>11</strong><span>Orders placed</span></div>
+            <div class="kpi"><strong>2</strong><span>Manager escalations</span></div>
+          </div>
+          <div class="grid-3 reveal" style="margin-top:1rem">
+            <div class="ops-card"><h3>Live reservation board</h3><p>Shows bookings, waitlist, VIP notes, birthdays, and availability overrides.</p></div>
+            <div class="ops-card"><h3>Menu controls</h3><p>Update pricing, mark items unavailable, set holiday hours, and adjust allergy tags.</p></div>
+            <div class="ops-card"><h3>Conversation monitor</h3><p>Review phone transcripts, email drafts, and low-confidence AI interactions.</p></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="demo-mode" data-view="demo">
+      <section>
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <div class="micro">Manager walkthrough</div>
+              <h2>Use this version during the presentation</h2>
+            </div>
+            <div>
+              <p>This mode turns the site into a guided walkthrough. It lets you switch among the most important proof points so the manager can see how the real site, voice AI, reservations, and staff controls work together.</p>
+            </div>
+          </div>
+          <div class="demo-card reveal">
+            <div class="demo-split">
+              <aside class="demo-nav">
+                <button class="demo-trigger active" data-demo="welcome"><strong>New website visitor</strong><br><span>Warm AI greeting with quick actions.</span></button>
+                <button class="demo-trigger" data-demo="voice"><strong>AI talks naturally</strong><br><span>Voice host with expression and warmth.</span></button>
+                <button class="demo-trigger" data-demo="reservation"><strong>Reservation recovery</strong><br><span>Prime-time fallback offers.</span></button>
+                <button class="demo-trigger" data-demo="ops"><strong>Manager dashboard</strong><br><span>Operational control and reporting.</span></button>
+              </aside>
+              <div>
+                <div class="demo-panel active" data-panel="welcome">
+                  <div class="chat-card">
+                    <div class="msg ai">Welcome to Little Kitchen of Westport. I can help with reservations, pickup, delivery, catering, rewards, and menu questions. What can I take care of for you today?</div>
+                    <div class="msg user">What are your most popular dishes tonight?</div>
+                    <div class="msg ai">Tonight’s favorites include the Dynamite Roll, Komodo Roll, Sesame Beef or Chicken, Rendang Beef or Chicken, Tangerine Beef, and Pork Dumplings. I can also help you reserve a table or build a pickup order.</div>
+                  </div>
+                </div>
+                <div class="demo-panel" data-panel="voice">
+                  <div class="voice-shell">
+                    <div class="voice-card">
+                      <div class="voice-visual">
+                        <div class="orb"></div>
+                        <div class="bars"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+                      </div>
+                    </div>
+                    <div class="voice-card voice-script">
+                      <div class="script-line">“Thank you for calling Little Kitchen of Westport. I can help with reservations, delivery, pickup, catering, menu questions, and hours.”</div>
+                      <div class="script-line">“We’re fully booked at 7:00 PM, but I can offer 6:15, 6:30, or 8:00. Which works best for you?”</div>
+                      <div class="script-line">“Of course — I’ll note that allergy request, and for safety I also recommend a quick staff confirmation before we finalize.”</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="demo-panel" data-panel="reservation">
+                  <div class="chat-card">
+                    <div class="msg user">Can I reserve Saturday at 7:00 PM for 4?</div>
+                    <div class="msg ai">We’re fully booked at 7:00 PM, but I can offer 6:15 PM, 6:30 PM, or 8:00 PM. I can also add you to the waitlist if you prefer.</div>
+                    <div class="msg user">8:00 is good.</div>
+                    <div class="msg ai">Perfect — I’ll confirm 8:00 PM for four and send your reservation details by text and email.</div>
+                  </div>
+                </div>
+                <div class="demo-panel" data-panel="ops">
+                  <div class="grid-2">
+                    <div class="ops-card"><h3>Tonight’s AI activity</h3><p>24 inbound calls answered, 9 reservations booked, 4 prime-time saves, 11 orders placed, and 2 escalations.</p></div>
+                    <div class="ops-card"><h3>Manager actions</h3><p>86 Peking Duck, override holiday hours, review refund request, and inspect allergy-related transcripts.</p></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Little Kitchen of Westport · 423 Post Rd E, Westport, CT 06880 · (203) 454-5540 · westportkitchen@gmail.com</p>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      const root=document.documentElement;
+      const toggle=document.querySelector('[data-theme-toggle]');
+      let mode=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+      root.setAttribute('data-theme',mode);
+      toggle.textContent=mode==='dark'?'Light mode':'Dark mode';
+      toggle.addEventListener('click',()=>{mode=mode==='dark'?'light':'dark';root.setAttribute('data-theme',mode);toggle.textContent=mode==='dark'?'Light mode':'Dark mode';});
+
+      const modeButtons=[...document.querySelectorAll('.mode-btn')];
+      const views={site:document.querySelector('[data-view="site"]'),demo:document.querySelector('[data-view="demo"]')};
+      modeButtons.forEach(btn=>btn.addEventListener('click',()=>{modeButtons.forEach(b=>b.classList.remove('active'));btn.classList.add('active');const which=btn.dataset.mode;Object.entries(views).forEach(([k,v])=>v.classList.toggle('active',k===which));window.scrollTo({top:0,behavior:'smooth'});}))
+
+      const demoButtons=[...document.querySelectorAll('.demo-trigger')];
+      const demoPanels=[...document.querySelectorAll('.demo-panel')];
+      demoButtons.forEach(btn=>btn.addEventListener('click',()=>{demoButtons.forEach(b=>b.classList.remove('active'));demoPanels.forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.querySelector(`[data-panel="${btn.dataset.demo}"]`).classList.add('active');}))
+
+      const observer=new IntersectionObserver((entries)=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});
+      document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+    })();
+  </script>
+</body>
+</html>
