@@ -301,17 +301,86 @@ async function playGreeting() {
               <p>Managers and staff need live visibility into reservations, phone transcripts, AI conversations, 86’d items, pricing, and escalation. This dashboard section shows the operational layer that supports the guest-facing site.</p>
             </div>
           </div>
-          <div class="ops-kpis reveal">
-            <div class="kpi"><strong>24</strong><span>Calls answered</span></div>
-            <div class="kpi"><strong>9</strong><span>Reservations booked</span></div>
-            <div class="kpi"><strong>11</strong><span>Orders placed</span></div>
-            <div class="kpi"><strong>2</strong><span>Manager escalations</span></div>
+      <!-- COMPREHENSIVE DASHBOARD -->
+      <div class="ops-kpis reveal">
+        <div class="kpi"><strong>$2,847</strong><span style="color:var(--color-green); font-size:var(--text-sm); margin-left:.5rem;">▲ 12.3%</span><br><span style="color:var(--color-text-muted); font-size:var(--text-sm);">Revenue Today</span></div>
+        <div class="kpi"><strong>156</strong><span style="color:var(--color-green); font-size:var(--text-sm); margin-left:.5rem;">▲ 8.1%</span><br><span style="color:var(--color-text-muted); font-size:var(--text-sm);">AI Interactions</span></div>
+        <div class="kpi"><strong>47</strong><span style="color:var(--color-green); font-size:var(--text-sm); margin-left:.5rem;">▲ 15.2%</span><br><span style="color:var(--color-text-muted); font-size:var(--text-sm);">Reservations</span></div>
+        <div class="kpi"><strong>89</strong><span style="color:var(--color-green); font-size:var(--text-sm); margin-left:.5rem;">▲ 6.3%</span><br><span style="color:var(--color-text-muted); font-size:var(--text-sm);">Orders Placed</span></div>
+      </div>
+
+      <div class="grid-2 reveal" style="margin-top:2rem;">
+        <div class="ops-card">
+          <h3 style="margin-bottom:1rem;">🔔 AI Special Notes</h3>
+          <div style="display:grid;gap:.75rem;">
+            <div style="padding:.75rem;background:var(--color-surface-2);border-radius:var(--radius-md);border-left:3px solid var(--color-gold);">
+              <strong style="font-size:var(--text-sm);">VIP Guest Detected</strong>
+              <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-top:.25rem;">Table 12 - Regular customer Sarah Chen (visits 2x/week). Prefers window seating.</p>
+            </div>
+            <div style="padding:.75rem;background:var(--color-surface-2);border-radius:var(--radius-md);border-left:3px solid var(--color-primary);">
+              <strong style="font-size:var(--text-sm);">Allergy Alert Created</strong>
+              <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-top:.25rem;">Order #4721 - Severe peanut allergy. Kitchen notified. Customer requested staff confirmation.</p>
+            </div>
+            <div style="padding:.75rem;background:var(--color-surface-2);border-radius:var(--radius-md);border-left:3px solid var(--color-green);">
+              <strong style="font-size:var(--text-sm);">Large Party Request</strong>
+              <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-top:.25rem;">Birthday celebration for 18 people next Saturday 7pm. Contact: james.williams@email.com</p>
+            </div>
           </div>
-          <div class="grid-3 reveal" style="margin-top:1rem">
-            <div class="ops-card"><h3>Live reservation board</h3><p>Shows bookings, waitlist, VIP notes, birthdays, and availability overrides.</p></div>
-            <div class="ops-card"><h3>Menu controls</h3><p>Update pricing, mark items unavailable, set holiday hours, and adjust allergy tags.</p></div>
-            <div class="ops-card"><h3>Conversation monitor</h3><p>Review phone transcripts, email drafts, and low-confidence AI interactions.</p></div>
+        </div>
+
+        <div class="ops-card">
+          <h3 style="margin-bottom:1rem;">⚠️ AI Escalations</h3>
+          <div style="display:grid;gap:.75rem;">
+            <div style="padding:.75rem;background:color-mix(in srgb,var(--color-primary) 10%, var(--color-surface-2));border-radius:var(--radius-md);">
+              <strong style="font-size:var(--text-sm);">Refund Request - Needs Manager</strong>
+              <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-top:.25rem;">Order #4718 - Customer claims food was cold. Requesting full refund + compensation.</p>
+              <span style="font-size:var(--text-xs);color:var(--color-text-faint);">Escalated 14 mins ago</span>
+            </div>
+            <div style="padding:.75rem;background:color-mix(in srgb,var(--color-primary) 10%, var(--color-surface-2));border-radius:var(--radius-md);">
+              <strong style="font-size:var(--text-sm);">Complex Modification Request</strong>
+              <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-top:.25rem;">Customer wants Peking Duck prepared with gluten-free sauce. Need chef approval.</p>
+              <span style="font-size:var(--text-xs);color:var(--color-text-faint);">Escalated 8 mins ago</span>
+            </div>
+            <div style="padding:.75rem;background:color-mix(in srgb,var(--color-primary) 10%, var(--color-surface-2));border-radius:var(--radius-md);">
+              <strong style="font-size:var(--text-sm);">Reservation Conflict</strong>
+              <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-top:.25rem;">Double-booking detected for 8pm window table. Manual resolution needed.</p>
+              <span style="font-size:var(--text-xs);color:var(--color-text-faint);">Escalated 2 mins ago</span>
+            </div>
           </div>
+        </div>
+      </div>
+
+      <div class="grid-3 reveal" style="margin-top:2rem;">
+        <div class="ops-card">
+          <h3>📊 Order Analytics</h3>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-top:.5rem;">Top items today: Dynamite Roll (18), Pad Thai (15), Rendang Beef (12)</p>
+          <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--color-divider);">
+            <div style="display:flex;justify-content:space-between;margin-bottom:.5rem;"><span style="font-size:var(--text-sm);">Pickup</span><strong style="font-size:var(--text-sm);">62%</strong></div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:.5rem;"><span style="font-size:var(--text-sm);">Delivery</span><strong style="font-size:var(--text-sm);">28%</strong></div>
+            <div style="display:flex;justify-content:space-between;"><span style="font-size:var(--text-sm);">Dine-in Assist</span><strong style="font-size:var(--text-sm);">10%</strong></div>
+          </div>
+        </div>
+
+        <div class="ops-card">
+          <h3>💬 AI Performance</h3>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-top:.5rem;">Avg. resolution time: 34 seconds</p>
+          <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--color-divider);">
+            <div style="display:flex;justify-content:space-between;margin-bottom:.5rem;"><span style="font-size:var(--text-sm);">Successfully Resolved</span><strong style="font-size:var(--text-sm);color:var(--color-green);">94.2%</strong></div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:.5rem;"><span style="font-size:var(--text-sm);">Escalated</span><strong style="font-size:var(--text-sm);">4.5%</strong></div>
+            <div style="display:flex;justify-content:space-between;"><span style="font-size:var(--text-sm);">Abandoned</span><strong style="font-size:var(--text-sm);color:var(--color-primary);">1.3%</strong></div>
+          </div>
+        </div>
+
+        <div class="ops-card">
+          <h3>⏰ Peak Times Today</h3>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-top:.5rem;">Busiest periods and staffing needs</p>
+          <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--color-divider);">
+            <div style="display:flex;justify-content:space-between;margin-bottom:.5rem;"><span style="font-size:var(--text-sm);">Lunch Rush</span><strong style="font-size:var(--text-sm);">12:15-1:45pm</strong></div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:.5rem;"><span style="font-size:var(--text-sm);">Dinner Peak</span><strong style="font-size:var(--text-sm);">6:30-8:30pm</strong></div>
+            <div style="display:flex;justify-content:space-between;"><span style="font-size:var(--text-sm);">Predicted Wait</span><strong style="font-size:var(--text-sm);color:var(--color-gold);">35-45 min</strong></div>
+          </div>
+        </div>
+      </div>
         </div>
       </section>
     </div>
